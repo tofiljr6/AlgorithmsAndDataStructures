@@ -1,49 +1,65 @@
 from math import floor
-import sys
-import fileinput
 
+def compare(a, b, decison):
+    """ The method compares two numbers and returns True or False accordign this rules:
+        decision <= return True if a <= b
+                    return False if a > b
+        decision >= return True if a >= b
+                    return False if a < b
+    """
+    if decison == "<=":
+        return a <= b
+    elif decison == ">=":
+        return a >= b
 
-def insertionSort(A):
-    """The method sorts A - array in insertion sort way"""
+def insertionSort(A, dec):
+    """ The method sorts A - array in insertion sort way.
+        A method returns array in 'dec' order.
+    """
     for j in range(1, len(A)):
         key = A[j]
         i = j - 1
-        while i > -1 and A[i] > key:
+        while i > -1 and compare(key, A[i], dec):
             A[i + 1] = A[i]
             i = i - 1
         A[i + 1] = key
     return A
 
-
-def mergeSort(A):
-    """The method sorts A - array in merge sort way"""
+def mergeSort(A, dec):
+    """ The method sorts A - array in merge sort way.
+        A method returns array in 'dec' order.
+    """
     if len(A) > 1:
-        return merge(mergeSort(A[:floor(len(A)/2)]), mergeSort(A[floor((len(A)/2)):]))
+        return merge(mergeSort(A[:floor(len(A)/2)], dec),
+                     mergeSort(A[floor((len(A)/2)):], dec), dec)
     else:
         return A
 
-
-def merge(C, D):
-    """The method merge two sorted arrays keeping them still sorted"""
+def merge(C, D, dec):
+    """ The method merge two sorted arrays keeping them still sorted.
+        A method helps in main algoritm mergeSort.
+    """
     if len(C) == 0:
         return D
     if len(D) == 0:
         return C
-    if C[0] <= D[0]:
-        return C[0:1] + merge(C[1:], D)
+    if compare(C[0], D[0], dec):
+        return C[0:1] + merge(C[1:], D, dec)
     else:
-        return D[0:1] + merge(C, D[1:])
+        return D[0:1] + merge(C, D[1:], dec)
 
 
-def quickSort(A, p, r):
-    """The method sorts A - array in quick sort way QS(A,0,len(A)-1)"""
+def quickSort(A, p, r, dec):
+    """ The method sorts A - array in quick sort way QS(A,0,len(A)-1).
+    """
     if p < r:
-        q = partitionHoare(A, p, r)
-        quickSort(A, p, q)
-        quickSort(A, q+1, r)
+        q = partitionHoare(A, p, r, dec)
+        quickSort(A, p, q, dec)
+        quickSort(A, q+1, r, dec)
 
-
-def partitionHoare(A, low, high):
+def partitionHoare(A, low, high, dec):
+    """ The method make partition in Hoare way.
+    """
     pivot = A[floor((low+high)/2)]
     i = low - 1
     j = high + 1
@@ -51,86 +67,34 @@ def partitionHoare(A, low, high):
     while True:
         while True:
             i += 1
-            if A[i] >= pivot:
+            if compare(pivot, A[i], dec):
                 break
 
         while True:
             j -= 1
-            if A[j] <= pivot:
+            if compare(A[j], pivot, dec):
                 break
 
         if i >= j:
             return j
         A[i], A[j] = A[j], A[i]
 
+ascending = "<="
+descending = ">="
 
-x = [1,5,10,13,6,3,2,8,11,4]
+t = [2,5,7,0,1,2,7,3,9,5]
+x = [2,5,7,0,1,2,7,3,9,5]
+y = [2,5,7,0,1,2,7,3,9,5]
+z = [2,5,7,0,1,2,7,3,9,5]
+w = [2,5,7,0,1,2,7,3,9,5]
+m = [2,5,7,0,1,2,7,3,9,5]
+n = [2,5,7,0,1,2,7,3,9,5]
 
-
-def finalCheck(A):
-    for i in range(len(A) - 1):
-        if A[i] > A[i+1]:
-            return False
-    return True
-
-
-
-# print(quickSort(x, 0, len(x) - 1))
-# print(partitionHoare(x, 0, len(x) -1))
-
-# print(quickSort(x, 0, len(x) - 1))
-# print(x)
-
-# cmp = -1
-#
-def do_work():
-    """ Function to handle command line usage"""
-
-    elements = int(input("Podaj ilość elementów w tablicy: "))
-    print("Tablica rozmiaru: ", elements)
-    array = list()
-    for element in range(elements):
-        array.append(int(input()))
-    print("Wpisana tablica:", array)
-
-    decision = list()
-
-    args = sys.argv
-    args = args[1:] # First element of args is the file name
-    if len(args) == 0:
-        print('You have not passed any commands in!')
-    else:
-        for i in range(len(args)):
-            if args[i] == '--help':
-                print('Basic command line program')
-                print('Options:')
-                print('    --help -> show this basic help menu.')
-                print('    --monty -> show a Monty Python quote.')
-                print('    --veg -> show a random vegetable')
-            elif args[i] == '--type':
-                if args[i+1] == 'quick':
-                    decision.append(1)
-                    print('quicksort')
-                elif args[i+1] == 'merge':
-                    decision.append(2)
-                    print('mergesort')
-                    y = mergeSort(array)
-                    print('Result', y, finalCheck(y))
-                elif args[i+1] == 'insert':
-                    print('insert')
-                else:
-                    print("Unrecogniezed algoritm to sorting")
-            elif args[i] == '--comp':
-                if args[i+1] == '>=':
-                    decision.append(4)
-                    cmp = 0
-                    print('desc')
-                elif args[i+1] == '<=':
-                    decision.append(5)
-                    print('ascending')
-                    cmp = 1
-
-
-
-if __name__ == '__main__':
-    do_work()
+print("Insert >= x", t, " ->", insertionSort(x, descending))
+print("Insert <= y", t, " ->", insertionSort(y, ascending))
+print("Merge >= z", t, " ->", mergeSort(z, descending))
+print("Merge <= w", t, " ->", mergeSort(w, ascending))
+quickSort(m, 0, len(m)-1, ">=")
+quickSort(n, 0, len(n)-1, "<=")
+print("Quick >= m", t, " ->", m)
+print("Quick <= n", t, " ->", n)
