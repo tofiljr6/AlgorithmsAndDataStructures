@@ -30,12 +30,12 @@ Dzisiaj must have
   - [X] INSERTIONSORT
 - [ ] czas działania algorytmu
 - [X] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
-- [ ] naprawić insertion sort - zwraca tablice z porównaniami i podstawieniami, trzeba wybierać [0], nieładne to zrobiłem
-- [ ] obsługa błedu obsługi z konsoli *LATE*
-- [ ] po kolei instrukcje wypisuje **!!!**
-  - [ ] MERGESORT
+- [ ] naprawić insertion sort - zwraca tablice z porównaniami i podstawieniami, trzeba wybierać [0], nieładne to zrobiłem **!**
+- [ ] obsługa błedu obsługi z konsoli **!**
+- [X] po kolei instrukcje wypisuje **!!!**
+  - [X] MERGESORT
   - [X] QUICKSORT
-  - [ ] INSERTIONSORT
+  - [X] INSERTIONSORT
 
 ### Porównania
 

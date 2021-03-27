@@ -42,10 +42,10 @@ def insertionSort(A, dec):
     for j in range(1, len(A)):
         key = A[j] # I count this substitution later - end of the method
         i = j - 1
-        while i > -1 and compare(key, A[i], dec):
-            # compare in while
-            comparison += 1
 
+        # compare in while
+        comparison += 1
+        while i > -1 and compare(key, A[i], dec):
             # substitute
             A[i + 1] = A[i]
             substitution += 1
@@ -53,6 +53,7 @@ def insertionSort(A, dec):
             i -= 1
         # substitute key value
         A[i + 1] = key
+        sys.stderr.write("%s\n" % A)
         substitution += 1
     return A, comparison, substitution
 
@@ -216,7 +217,12 @@ def doWork():
         writeStdErrSubsAndComp(mergesub, mergecomp)
         sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
     elif sortAlg == "insert":
-        array = insertionSort(array, sortOrder)[0]
+        tmp = insertionSort(array, sortOrder)
+        array = tmp[0]
+        insertcomp = tmp[1]
+        insertsub = tmp[2]
+        writeStdErrSubsAndComp(insertsub, insertcomp)
+        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
 
     print("Sorted array: ", sortAlg, "->", array )
 
