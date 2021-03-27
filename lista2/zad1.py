@@ -2,6 +2,7 @@ from math import floor
 import sys
 from functools import wraps
 from time import process_time
+import time
 import timeit
 
 # is this the best option to measure time on execution?
@@ -175,11 +176,16 @@ def loadArray():
     return array
 
 
-def writeStdErrSubsAndComp(sub, comp):
+def writeStdErrSubsAndComp(sub, comp, sorted, deltat):
     """ Function writes on standard error output numbers of substitution and comparison
     """
+    print("Number of substitution: %s" % sub)
+    print("Number of comparison: %s" % comp)
+
     sys.stderr.write("Number of substitution: %s \n" % sub)
     sys.stderr.write("Number of comparison: %s \n" % comp)
+    sys.stderr.write("It is sorted? %r \n" % sorted)
+    sys.stderr.write("Time: %s s \n" % deltat)
 
 
 def doWork():
@@ -208,27 +214,48 @@ def doWork():
 
     # execution
     if sortAlg == "quick":
+        # time measure
+        start = time.time()
         quickSort(array, 0, len(array) - 1, sortOrder)
+        stop = time.time()
+
+        # std error output + pirnts array
         sys.stderr.write("A: %s \n" % array)
-        writeStdErrSubsAndComp(quicksub, quickcomp)
-        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
+        writeStdErrSubsAndComp(quicksub,
+                               quickcomp,
+                               finalCheck(array, sortOrder),
+                               round(stop - start, 20))
     elif sortAlg == "merge":
+        # time measure
+        start = time.time()
         array = mergeSort(array, sortOrder)
-        writeStdErrSubsAndComp(mergesub, mergecomp)
-        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
+        stop = time.time()
+
+        # std error output
+        writeStdErrSubsAndComp(mergesub,
+                               mergecomp,
+                               finalCheck(array, sortOrder),
+                               round(stop - start, 20))
     elif sortAlg == "insert":
+        # example sample - only for test
+        # arr = [random.randint(1, 20) for i in range(50000)]
+
+        # time measure
+        start = time.time()
         tmp = insertionSort(array, sortOrder)
+        stop = time.time()
+
         array = tmp[0]
         insertcomp = tmp[1]
         insertsub = tmp[2]
-        writeStdErrSubsAndComp(insertsub, insertcomp)
-        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
 
-    print("Sorted array: ", sortAlg, "->", array )
+        # std error output
+        writeStdErrSubsAndComp(insertsub,
+                               insertcomp,
+                               finalCheck(array, sortOrder),
+                               round(stop - start, 20))
 
-
-
-
+    print("Sorted array: ", sortAlg,  sortOrder, "->", array )
 
 
 
