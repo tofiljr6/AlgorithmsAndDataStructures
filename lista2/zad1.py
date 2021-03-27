@@ -95,8 +95,8 @@ def merge(C, D, dec):
         return D[0:1] + merge(C, D[1:], dec)
 
 
-quicksub = 0
-quickcomp = 0
+quicksub = 0 # substitution in quicksort algorithm
+quickcomp = 0 # comparison in quicksort algorithm
 
 def quickSort(A, p, r, dec):
     """ The method sorts A - array in quick sort way QS(A,0,len(A)-1).
@@ -141,6 +141,14 @@ def partitionHoare(A, low, high, dec):
         A[i], A[j] = A[j], A[i]
 
 
+def finalCheck(A, dec):
+    """ The method checks the result and confirms if array is sorted
+    """
+    for i in range(len(A) - 1):
+        if not compare(A[i], A[i+1], dec):
+            return False
+    return True
+
 ascending = "<="
 descending = ">="
 
@@ -163,12 +171,22 @@ q = insertionSort(x, descending)
 c = 0
 s = 0
 
+# insertion PLAYGROUND
 print("Insert >= x", t, " ->", insertionSort(x, descending))
 print("Insert <= y", t, " ->", insertionSort(y, ascending))
-print("Merge >= z", t, " ->", mergeSort(z, descending), mergecomp, mergesub)
-mergecomp = 0
-print("Merge <= w", ww, " ->", mergeSort(w, ascending), mergecomp, mergesub)
 
+# Merge PLAYGROUND
+z1 = mergeSort(z, descending)
+print("Merge >= z", t, " ->", z1 , mergecomp, mergesub)
+print(z1, " ---", finalCheck(z1, descending))
+mergecomp = 0
+
+w1 = mergeSort(w, ascending)
+print("Merge <= w", ww, " ->", w1 , mergecomp, mergesub)
+print(w1, " ---", finalCheck(w1, ascending))
+mergecomp = 0
+
+# quickSort PLAYGROUND
 quickSort(m, 0, len(m)-1, ">=")
 q1b = quicksub
 q1a = quickcomp
@@ -185,8 +203,6 @@ quickcomp = 0
 
 print("Quick >= m", mm, " ->", m, q1a, q1b)
 print("Quick <= n", nn, " ->", n, q2a, q2b)
-
-
 
 i = [8,2,4,9,3,6]
 ii = i

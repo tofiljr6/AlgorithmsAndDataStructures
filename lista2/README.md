@@ -24,12 +24,12 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 Dzisiaj must have
 - [ ] standardowe wyjście błędu
 - [ ] obsługa z konsoli
-- [ ] porównania i przedstawienie NOW
+- [X] porównania i przedstawienie NOW
   - [X] MERGESORT
-  - [ ] QUICKSORT
-  - [ ] INSERTIONSORT
+  - [X] QUICKSORT
+  - [X] INSERTIONSORT
 - [ ] czas działania algorytmu
-- [ ] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
+- [X] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
 
 ### Porównania
 
