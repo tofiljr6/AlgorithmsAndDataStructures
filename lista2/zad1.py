@@ -66,10 +66,15 @@ def mergeSort(A, dec):
     global mergecomp
     global mergesub # merge substitution equals 0 becasue i dont use it there
 
-    mergecomp += 1
+    # mergecomp += 1
     if len(A) > 1:
-        return merge(mergeSort(A[:floor(len(A)/2)], dec),
-                     mergeSort(A[floor(len(A)/2):], dec), dec)
+        sys.stderr.write("DIVIDE %s\n" % A)
+        L = mergeSort(A[:floor(len(A)/2)], dec)
+        R = mergeSort(A[floor(len(A)/2):], dec)
+        sys.stderr.write("CONQUER %s + %s = " % (L, R))
+        MLR = merge(L, R, dec)
+        sys.stderr.write("%s\n" % MLR)
+        return MLR
     else:
         return A
 
@@ -78,14 +83,13 @@ def merge(C, D, dec):
     """ The method merge two sorted arrays keeping them still sorted.
         A method helps in main algoritm mergeSort.
     """
-    # i interprated lenght of array as comparison
+    # i dont interprated lenght of array as comparison
+    # comparistion is if and only if when i merge two arrays
     global mergecomp
 
-    mergecomp += 1
     if len(C) == 0:
         return D
 
-    mergecomp += 1
     if len(D) == 0:
         return C
 
@@ -103,8 +107,10 @@ quickcomp = 0 # comparison in quicksort algorithm
 def quickSort(A, p, r, dec):
     """ The method sorts A - array in quick sort way QS(A,0,len(A)-1).
     """
+    # i dont interprated lenght of array as comparison
     global quickcomp
-    quickcomp += 1
+
+    # quickcomp += 1
     if p < r:
         q = partitionHoare(A, p, r, dec)
         quickSort(A, p, q, dec)
@@ -137,7 +143,7 @@ def partitionHoare(A, low, high, dec):
             if compare(A[j], pivot, dec):
                 break
 
-        quickcomp += 1
+        # quickcomp += 1
         if i >= j:
             return j
 
@@ -208,6 +214,7 @@ def doWork():
     elif sortAlg == "merge":
         array = mergeSort(array, sortOrder)
         writeStdErrSubsAndComp(mergesub, mergecomp)
+        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
     elif sortAlg == "insert":
         array = insertionSort(array, sortOrder)[0]
 
