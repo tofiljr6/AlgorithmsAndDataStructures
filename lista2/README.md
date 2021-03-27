@@ -22,7 +22,7 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 
 ## ToDo
 Dzisiaj must have
-- [ ] standardowe wyjście błędu **prawie zrobione, ale teraz nie na to pora**
+- [X] standardowe wyjście błędu **prawie zrobione, ale teraz nie na to pora**
 - [X] obsługa z konsoli
 - [X] porównania i przedstawienie NOW
   - [X] MERGESORT
@@ -31,6 +31,11 @@ Dzisiaj must have
 - [ ] czas działania algorytmu
 - [X] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
 - [ ] naprawić insertion sort - zwraca tablice z porównaniami i podstawieniami, trzeba wybierać [0], nieładne to zrobiłem
+- [ ] obsługa błedu obsługi z konsoli *LATE*
+- [ ] po kolei instrukcje wypisuje **!!!**
+  - [ ] MERGESORT
+  - [X] QUICKSORT
+  - [ ] INSERTIONSORT
 
 ### Porównania
 

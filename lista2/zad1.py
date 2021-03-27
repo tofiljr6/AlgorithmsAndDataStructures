@@ -125,6 +125,7 @@ def partitionHoare(A, low, high, dec):
             i += 1
 
             quickcomp += 1
+            sys.stderr.write("I: if %s %s %s \n" % (pivot, dec, A[i]))
             if compare(pivot, A[i], dec):
                 break
 
@@ -132,6 +133,7 @@ def partitionHoare(A, low, high, dec):
             j -= 1
 
             quickcomp += 1
+            sys.stderr.write("J: if %s %s %s \n" % (A[j], dec, pivot))
             if compare(A[j], pivot, dec):
                 break
 
@@ -140,6 +142,7 @@ def partitionHoare(A, low, high, dec):
             return j
 
         quicksub += 1
+        sys.stderr.write("A: %s swap %s <-> %s \n" % (A, A[i], A[j]))
         A[i], A[j] = A[j], A[i]
 
 
@@ -158,11 +161,19 @@ descending = ">="
 def loadArray():
     """ Function
     """
-    elements = int(input("Podaj ilość elementów tablicy: "))
+    elements = int(input())
     array = list()
     for element in range(elements):
         array.append(int(input()))
     return array
+
+
+def writeStdErrSubsAndComp(sub, comp):
+    """ Function writes on standard error output numbers of substitution and comparison
+    """
+    sys.stderr.write("Number of substitution: %s \n" % sub)
+    sys.stderr.write("Number of comparison: %s \n" % comp)
+
 
 def doWork():
     """ Function to handle command line usage.
@@ -191,19 +202,16 @@ def doWork():
     # execution
     if sortAlg == "quick":
         quickSort(array, 0, len(array) - 1, sortOrder)
+        sys.stderr.write("A: %s \n" % array)
+        writeStdErrSubsAndComp(quicksub, quickcomp)
+        sys.stderr.write("It is sorted? %r " % finalCheck(array, sortOrder))
     elif sortAlg == "merge":
         array = mergeSort(array, sortOrder)
+        writeStdErrSubsAndComp(mergesub, mergecomp)
     elif sortAlg == "insert":
-        array = insertionSort(array, sortOrder)[0] 
+        array = insertionSort(array, sortOrder)[0]
 
     print("Sorted array: ", sortAlg, "->", array )
-
-    print("I sort use: ", sortAlg, " in order", sortOrder)
-
-
-
-
-
 
 
 
