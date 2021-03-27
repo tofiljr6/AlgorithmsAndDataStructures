@@ -73,6 +73,7 @@ def mergeSort(A, dec):
     else:
         return A
 
+
 def merge(C, D, dec):
     """ The method merge two sorted arrays keeping them still sorted.
         A method helps in main algoritm mergeSort.
@@ -98,16 +99,17 @@ def merge(C, D, dec):
 quicksub = 0 # substitution in quicksort algorithm
 quickcomp = 0 # comparison in quicksort algorithm
 
+
 def quickSort(A, p, r, dec):
     """ The method sorts A - array in quick sort way QS(A,0,len(A)-1).
     """
     global quickcomp
     quickcomp += 1
-    print(A)
     if p < r:
         q = partitionHoare(A, p, r, dec)
         quickSort(A, p, q, dec)
         quickSort(A, q+1, r, dec)
+
 
 def partitionHoare(A, low, high, dec):
     """ The method make partition in Hoare way.
@@ -152,109 +154,62 @@ def finalCheck(A, dec):
 ascending = "<="
 descending = ">="
 
-t = [2,5,7,0,1,2,7,3,9,5]
-x = [2,5,7,0,1,2,7,3,9,5]
-y = [2,5,7,0,1,2,7,3,9,5]
-z = [2,5,7,0,1,2,7,3,9,5]
-# w = [8, 3, 1, 2, 9, 7 ,6]
-w = [6,4,1,3]
-ww = w
-# w = [2,5,7,0,1,2,7,3,9,5]
-# m = [2,5,7,0,1,2,7,3,9,5]
-m = [6,4,5,1,3]
-mm = m
-# n = [2,5,7,0,1,2,7,3,9,5]
-n = [6,4,5,1,3]
-nn = n
 
-q = insertionSort(x, descending)
-c = 0
-s = 0
+def loadArray():
+    """ Function
+    """
+    elements = int(input("Podaj ilość elementów tablicy: "))
+    array = list()
+    for element in range(elements):
+        array.append(int(input()))
+    return array
 
-# insertion PLAYGROUND
-print("Insert >= x", t, " ->", insertionSort(x, descending))
-print("Insert <= y", t, " ->", insertionSort(y, ascending))
+def doWork():
+    """ Function to handle command line usage.
+    """
+    # input array
+    array = loadArray()
 
-# Merge PLAYGROUND
-z1 = mergeSort(z, descending)
-print("Merge >= z", t, " ->", z1 , mergecomp, mergesub)
-print(z1, " ---", finalCheck(z1, descending))
-mergecomp = 0
+    sortAlg = 0
+    sortOrder = 0
 
-w1 = mergeSort(w, ascending)
-print("Merge <= w", ww, " ->", w1 , mergecomp, mergesub)
-print(w1, " ---", finalCheck(w1, ascending))
-mergecomp = 0
+    # command handler
+    args = sys.argv
+    args = args[1:] # first element of args is the file name
+    if (len(args) == 0):
+        # may deflaut sorting
+        print('You have not passed any commands in!')
+    else:
+        for i in range(len(args)):
+            if args[i] == "--type":
+                if args[i+1] in ["quick", "merge", "insert"]:
+                    sortAlg = args[i+1]
+            elif args[i] == "--comp":
+                if args[i+1] in [">=", "<="]:
+                    sortOrder = args[i+1]
 
-# quickSort PLAYGROUND
-quickSort(m, 0, len(m)-1, ">=")
-q1b = quicksub
-q1a = quickcomp
-quicksub = 0
-quickcomp = 0
+    # execution
+    if sortAlg == "quick":
+        quickSort(array, 0, len(array) - 1, sortOrder)
+    elif sortAlg == "merge":
+        array = mergeSort(array, sortOrder)
+    elif sortAlg == "insert":
+        array = insertionSort(array, sortOrder)[0] 
 
-print("\n")
+    print("Sorted array: ", sortAlg, "->", array )
 
-quickSort(n, 0, len(n)-1, "<=")
-q2b = quicksub
-q2a = quickcomp
-quicksub = 0
-quickcomp = 0
-
-print("Quick >= m", mm, " ->", m, q1a, q1b)
-print("Quick <= n", nn, " ->", n, q2a, q2b)
-
-i = [8,2,4,9,3,6]
-ii = i
-print("TEST", ii, "-->", insertionSort(i, ascending))
+    print("I sort use: ", sortAlg, " in order", sortOrder)
 
 
-# tow ways to stderr !!!
-print("test standart error", file=sys.stderr)
-sys.stderr.write("test standart output error\n")
 
-# def f(n):
-#     if n == 1:
-#         return 1
-#     return n * f(n-1)
-#
-# print(f(4))
 
-# xc = [2,5,7,0,1,2,7,3,9,5]
-# print(partitionHoare(xc, 0, len(xc) -1, ascending))
-# print("XX", xx)
-#
-# if __name__ == '__main__':
-#     import timeit
-#     print("-><-><-><-><-", timeit.timeit("f(5)", setup="from __main__ import f"))
-#     print("-><-><-><-><-", timeit.timeit("f(10)", setup="from __main__ import f"))
-#     print("-><-><-><-><-", timeit.timeit("f(20)", setup="from __main__ import f"))
 
-# # linear search function
-# def linear_search(mylist, find):
-#     for x in mylist:
-#         if x == find:
-#             return True
-#     return False
-#
-# # compute linear search time
-# def linear_time():
-#     SETUP_CODE = '''
-# from __main__ import linear_search
-# from random import randint'''
-#
-#     TEST_CODE = '''
-# mylist = [x for x in range(10000)]
-# find = randint(0, len(mylist))
-# linear_search(mylist, find)
-#     '''
-#     # timeit.repeat statement
-#     times = timeit.repeat(setup = SETUP_CODE,
-#                           stmt = TEST_CODE,
-#                           repeat = 3,
-#                           number = 10000)
-#
-#     # priniting minimum exec. time
-#     print('Linear search time: {}'.format(min(times)))
-#
-# linear_time()
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    doWork()

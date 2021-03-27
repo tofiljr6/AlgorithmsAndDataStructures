@@ -23,13 +23,14 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 ## ToDo
 Dzisiaj must have
 - [ ] standardowe wyjście błędu **prawie zrobione, ale teraz nie na to pora**
-- [ ] obsługa z konsoli
+- [X] obsługa z konsoli
 - [X] porównania i przedstawienie NOW
   - [X] MERGESORT
   - [X] QUICKSORT
   - [X] INSERTIONSORT
 - [ ] czas działania algorytmu
 - [X] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
+- [ ] naprawić insertion sort - zwraca tablice z porównaniami i podstawieniami, trzeba wybierać [0], nieładne to zrobiłem
 
 ### Porównania
 
