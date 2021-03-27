@@ -22,7 +22,7 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 
 ## ToDo
 Dzisiaj must have
-- [ ] standardowe wyjście błędu
+- [ ] standardowe wyjście błędu **prawie zrobione, ale teraz nie na to pora**
 - [ ] obsługa z konsoli
 - [X] porównania i przedstawienie NOW
   - [X] MERGESORT
@@ -34,4 +34,8 @@ Dzisiaj must have
 ### Porównania
 
 - porównania to każdy if else itp
-- przedstawienia to elemntów np. ```A[j] = A[j+1]```
+- przedstawienia to elemntów np. `A[j] = A[j+1]`
+
+### Strerr
+
+`python3 zad1.py 2> err.txt` wypisuje to co na standardowym wyjściu było!

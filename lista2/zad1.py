@@ -1,5 +1,5 @@
 from math import floor
-
+import sys
 from functools import wraps
 from time import process_time
 import timeit
@@ -209,7 +209,9 @@ ii = i
 print("TEST", ii, "-->", insertionSort(i, ascending))
 
 
-
+# tow ways to stderr !!!
+print("test standart error", file=sys.stderr)
+sys.stderr.write("test standart output error\n")
 
 # def f(n):
 #     if n == 1:
