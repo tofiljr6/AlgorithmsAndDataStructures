@@ -103,6 +103,7 @@ def quickSort(A, p, r, dec):
     """
     global quickcomp
     quickcomp += 1
+    print(A)
     if p < r:
         q = partitionHoare(A, p, r, dec)
         quickSort(A, p, q, dec)
@@ -116,28 +117,28 @@ def partitionHoare(A, low, high, dec):
     j = high + 1
 
     global quicksub, quickcomp
-    # comparison = 0
-    # substitution = 0
 
     while True:
         while True:
             i += 1
+
+            quickcomp += 1
             if compare(pivot, A[i], dec):
                 break
-            quickcomp += 1
 
         while True:
             j -= 1
+
+            quickcomp += 1
             if compare(A[j], pivot, dec):
                 break
-            quickcomp += 1
 
+        quickcomp += 1
         if i >= j:
             return j
-        quickcomp += 1
 
+        quicksub += 1
         A[i], A[j] = A[j], A[i]
-        quickcomp += 1
 
 
 ascending = "<="
@@ -151,8 +152,12 @@ z = [2,5,7,0,1,2,7,3,9,5]
 w = [6,4,1,3]
 ww = w
 # w = [2,5,7,0,1,2,7,3,9,5]
-m = [2,5,7,0,1,2,7,3,9,5]
-n = [2,5,7,0,1,2,7,3,9,5]
+# m = [2,5,7,0,1,2,7,3,9,5]
+m = [6,4,5,1,3]
+mm = m
+# n = [2,5,7,0,1,2,7,3,9,5]
+n = [6,4,5,1,3]
+nn = n
 
 q = insertionSort(x, descending)
 c = 0
@@ -165,19 +170,21 @@ mergecomp = 0
 print("Merge <= w", ww, " ->", mergeSort(w, ascending), mergecomp, mergesub)
 
 quickSort(m, 0, len(m)-1, ">=")
-q1a = quicksub
-q1b = quickcomp
+q1b = quicksub
+q1a = quickcomp
 quicksub = 0
 quickcomp = 0
+
+print("\n")
 
 quickSort(n, 0, len(n)-1, "<=")
-q2a = quicksub
-q2b = quickcomp
+q2b = quicksub
+q2a = quickcomp
 quicksub = 0
 quickcomp = 0
 
-print("Quick >= m", t, " ->", m, q1a, q1b)
-print("Quick <= n", t, " ->", n, q2a, q2b)
+print("Quick >= m", mm, " ->", m, q1a, q1b)
+print("Quick <= n", nn, " ->", n, q2a, q2b)
 
 
 
