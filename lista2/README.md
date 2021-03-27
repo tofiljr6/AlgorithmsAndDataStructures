@@ -25,6 +25,9 @@ Dzisiaj must have
 - [ ] standardowe wyjście błędu
 - [ ] obsługa z konsoli
 - [ ] porównania i przedstawienie NOW
+  - [X] MERGESORT
+  - [ ] QUICKSORT
+  - [ ] INSERTIONSORT
 - [ ] czas działania algorytmu
 - [ ] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
 

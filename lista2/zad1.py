@@ -63,9 +63,10 @@ def mergeSort(A, dec):
     """ The method sorts A - array in merge sort way.
         A method returns array in 'dec' order.
     """
-    global mergecomp, mergesub # merge substitution equals 0 becasue i dont use it there
-    mergecomp += 1
+    global mergecomp
+    global mergesub # merge substitution equals 0 becasue i dont use it there
 
+    mergecomp += 1
     if len(A) > 1:
         return merge(mergeSort(A[:floor(len(A)/2)], dec),
                      mergeSort(A[floor(len(A)/2):], dec), dec)
@@ -76,15 +77,18 @@ def merge(C, D, dec):
     """ The method merge two sorted arrays keeping them still sorted.
         A method helps in main algoritm mergeSort.
     """
-    # i always merge at least one of the comparison there
     # i interprated lenght of array as comparison
     global mergecomp
-    mergecomp += 1
 
+    mergecomp += 1
     if len(C) == 0:
         return D
+
+    mergecomp += 1
     if len(D) == 0:
         return C
+
+    mergecomp += 1
     if compare(C[0], D[0], dec):
         return C[0:1] + merge(C[1:], D, dec)
     else:
@@ -143,7 +147,10 @@ t = [2,5,7,0,1,2,7,3,9,5]
 x = [2,5,7,0,1,2,7,3,9,5]
 y = [2,5,7,0,1,2,7,3,9,5]
 z = [2,5,7,0,1,2,7,3,9,5]
-w = [2,5,7,0,1,2,7,3,9,5]
+# w = [8, 3, 1, 2, 9, 7 ,6]
+w = [6,4,1,3]
+ww = w
+# w = [2,5,7,0,1,2,7,3,9,5]
 m = [2,5,7,0,1,2,7,3,9,5]
 n = [2,5,7,0,1,2,7,3,9,5]
 
@@ -155,7 +162,7 @@ print("Insert >= x", t, " ->", insertionSort(x, descending))
 print("Insert <= y", t, " ->", insertionSort(y, ascending))
 print("Merge >= z", t, " ->", mergeSort(z, descending), mergecomp, mergesub)
 mergecomp = 0
-print("Merge <= w", t, " ->", mergeSort(w, ascending), mergecomp, mergesub)
+print("Merge <= w", ww, " ->", mergeSort(w, ascending), mergecomp, mergesub)
 
 quickSort(m, 0, len(m)-1, ">=")
 q1a = quicksub
