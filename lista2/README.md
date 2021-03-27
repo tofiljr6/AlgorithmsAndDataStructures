@@ -18,3 +18,17 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 5
 9 1 -7 1000 4
 ```
+# Notes - zad 1
+
+## ToDo
+Dzisiaj must have
+- [ ] standardowe wyjście błędu
+- [ ] obsługa z konsoli
+- [ ] porównania i przedstawienie NOW
+- [ ] czas działania algorytmu
+- [ ] final fun sprawdzajaca czy tablica jest faktycznie posortowana z podanym porządkiem
+
+### Porównania
+
+- porównania to każdy if else itp
+- przedstawienia to elemntów np. ```A[j] = A[j+1]```
