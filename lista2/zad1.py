@@ -1,6 +1,7 @@
 from math import floor
 import sys
 import time
+import random
 
 
 def compare(a, b, decison):
@@ -36,7 +37,7 @@ def insertionSort(A, dec):
             i -= 1
         # substitute key value
         A[i + 1] = key
-        sys.stderr.write("%s\n" % A)
+        # sys.stderr.write("%s\n" % A)
         substitution += 1
     return A, comparison, substitution
 
@@ -54,12 +55,12 @@ def mergeSort(A, dec):
 
     # mergecomp += 1
     if len(A) > 1:
-        sys.stderr.write("DIVIDE %s\n" % A)
+        # sys.stderr.write("DIVIDE %s\n" % A)
         L = mergeSort(A[:floor(len(A)/2)], dec)
         R = mergeSort(A[floor(len(A)/2):], dec)
-        sys.stderr.write("CONQUER %s + %s = " % (L, R))
+        # sys.stderr.write("CONQUER %s + %s = " % (L, R))
         MLR = merge(L, R, dec)
-        sys.stderr.write("%s\n" % MLR)
+        # sys.stderr.write("%s\n" % MLR)
         return MLR
     else:
         return A
@@ -69,21 +70,38 @@ def merge(C, D, dec):
     """ The method merge two sorted arrays keeping them still sorted.
         A method helps in main algoritm mergeSort.
     """
-    # i dont interprated lenght of array as comparison
-    # comparistion is if and only if when i merge two arrays
-    global mergecomp
+    n1 = len(C)
+    n2 = len(D)
+    E = [None] * (n1 + n2)
+    i, j, k = 0, 0, 0
 
-    if len(C) == 0:
-        return D
+    global mergecomp, mergesub
 
-    if len(D) == 0:
-        return C
+    while i < n1 and j < n2:
+        mergecomp += 1
+        mergesub += 1
+        if compare(C[i], D[j], dec):
+            E[k] = C[i]
+            i += 1
+        else:
+            E[k] = D[j]
+            j += 1
+        k += 1
 
-    mergecomp += 1
-    if compare(C[0], D[0], dec):
-        return C[0:1] + merge(C[1:], D, dec)
-    else:
-        return D[0:1] + merge(C, D[1:], dec)
+    while i < n1:
+        mergesub += 1
+        E[k] = C[i]
+        k += 1
+        i += 1
+
+    while j < n2:
+        mergesub += 1
+        E[k] = D[j]
+        k += 1
+        j += 1
+
+    return E
+
 
 
 quicksub = 0 # substitution in quicksort algorithm
@@ -117,7 +135,8 @@ def partitionHoare(A, low, high, dec):
             i += 1
 
             quickcomp += 1
-            sys.stderr.write("I: if %s %s %s \n" % (pivot, dec, A[i]))
+            # pretty print - commented because it dirt result in second exercises
+            # sys.stderr.write("I: if %s %s %s \n" % (pivot, dec, A[i]))
             if compare(pivot, A[i], dec):
                 break
 
@@ -125,7 +144,8 @@ def partitionHoare(A, low, high, dec):
             j -= 1
 
             quickcomp += 1
-            sys.stderr.write("J: if %s %s %s \n" % (A[j], dec, pivot))
+            # pretty print - commented because it dirt result in second exercises
+            # sys.stderr.write("J: if %s %s %s \n" % (A[j], dec, pivot))
             if compare(A[j], pivot, dec):
                 break
 
@@ -134,7 +154,8 @@ def partitionHoare(A, low, high, dec):
             return j
 
         quicksub += 1
-        sys.stderr.write("A: %s swap %s <-> %s \n" % (A, A[i], A[j]))
+        # pretty print - commented because it dirt result in second exercises
+        # sys.stderr.write("A: %s swap %s <-> %s \n" % (A, A[i], A[j]))
         A[i], A[j] = A[j], A[i]
 
 
@@ -172,14 +193,27 @@ def writeStdErrSubsAndComp(sub, comp, sorted, deltat):
     sys.stderr.write("Time: %s s \n" % deltat)
 
 
+def generateRandomArrays(k):
+    n = [i * 100 for i in range(10, 101)]
+    listarrays = list()
+    for kprim in range(k):
+        for en in n:
+            listarrays.append(list([random.randint(1,1000) for j in range(en)]))
+    return listarrays
+
 def doWork():
     """ Function to handle command line usage.
     """
     # input array
-    array = loadArray()
+    array = list()
 
     sortAlg = 0
     sortOrder = 0
+    kRepeats = 0
+
+    # I reset values in --stat
+    global quicksub, quickcomp
+    global mergesub, mergecomp
 
     # command handler
     args = sys.argv
@@ -188,6 +222,9 @@ def doWork():
         # may deflaut sorting
         print('You have not passed any commands in!')
     else:
+        if "--stat" not in args:
+            array = loadArray()
+
         for i in range(len(args)):
             if args[i] == "--type":
                 if args[i+1] in ["quick", "merge", "insert"]:
@@ -195,51 +232,101 @@ def doWork():
             elif args[i] == "--comp":
                 if args[i+1] in [">=", "<="]:
                     sortOrder = args[i+1]
+            elif args[i] == "--stat":
+                file = open(args[i+1], "w")
 
-    # execution
-    if sortAlg == "quick":
-        # time measure
-        start = time.time()
-        quickSort(array, 0, len(array) - 1, sortOrder)
-        stop = time.time()
+                # TODO: generate random arrays
+                grd = generateRandomArrays(int(args[i+2]))
+                # print(grd)
 
-        # std error output + pirnts array
-        sys.stderr.write("A: %s \n" % array)
-        writeStdErrSubsAndComp(quicksub,
-                               quickcomp,
-                               finalCheck(array, sortOrder),
-                               round(stop - start, 20))
-    elif sortAlg == "merge":
-        # time measure
-        start = time.time()
-        array = mergeSort(array, sortOrder)
-        stop = time.time()
+                kRepeats = int(args[i+2])
+                # file.write(args[i+2])
+                # print("--stat", args[i+2])
 
-        # std error output
-        writeStdErrSubsAndComp(mergesub,
-                               mergecomp,
-                               finalCheck(array, sortOrder),
-                               round(stop - start, 20))
-    elif sortAlg == "insert":
-        # example sample - only for test
-        # arr = [random.randint(1, 20) for i in range(50000)]
+    # execution if --stat not in command line
+    if "--stat" not in args:
+        if sortAlg == "quick":
+            # time measure
+            start = time.time()
+            quickSort(array, 0, len(array) - 1, sortOrder)
+            stop = time.time()
 
-        # time measure
-        start = time.time()
-        tmp = insertionSort(array, sortOrder)
-        stop = time.time()
+            # std error output + pirnts array
+            sys.stderr.write("A: %s \n" % array)
+            writeStdErrSubsAndComp(quicksub,
+                                   quickcomp,
+                                   finalCheck(array, sortOrder),
+                                   round(stop - start, 20))
+        elif sortAlg == "merge":
+            # time measure
+            start = time.time()
+            array = mergeSort(array, sortOrder)
+            stop = time.time()
 
-        array = tmp[0]
-        insertcomp = tmp[1]
-        insertsub = tmp[2]
+            # std error output
+            writeStdErrSubsAndComp(mergesub,
+                                   mergecomp,
+                                   finalCheck(array, sortOrder),
+                                   round(stop - start, 20))
+        elif sortAlg == "insert":
+            # example sample - only for test
+            # arr = [random.randint(1, 20) for i in range(50000)]
 
-        # std error output
-        writeStdErrSubsAndComp(insertsub,
-                               insertcomp,
-                               finalCheck(array, sortOrder),
-                               round(stop - start, 20))
+            # time measure
+            start = time.time()
+            tmp = insertionSort(array, sortOrder)
+            stop = time.time()
 
-    print("Sorted array: ", sortAlg,  sortOrder, "->", array )
+            array = tmp[0]
+            insertcomp = tmp[1]
+            insertsub = tmp[2]
+
+            # std error output
+            writeStdErrSubsAndComp(insertsub,
+                                   insertcomp,
+                                   finalCheck(array, sortOrder),
+                                   round(stop - start, 20))
+
+        print("Sorted array: ", sortAlg,  sortOrder, "->", array )
+    else:
+        for g in grd:
+            ## HOW TO REFACTOR THIS?
+            # quicksort
+            x = g.copy()
+            start = time.time()
+            quickSort(x, 0, len(x) - 1, sortOrder)
+            stop = time.time()
+            dt = round(stop - start, 10)
+            print("QUICK:", g, x, "substitution:", quicksub, "comparistion", quickcomp)
+            r = "QUICK: " + str(len(g)) + " " + str(quicksub) + " " + str(quickcomp) + " " + str(dt) + "\n"
+            file.write(r)
+            quicksub, quickcomp = 0, 0
+
+            # mergeSort
+            x = g.copy()
+            start = time.time()
+            xResult = mergeSort(x, sortOrder)
+            stop = time.time()
+            dt = round(stop - start, 10)
+            print("MERGE:", g, xResult, "substitution:", mergesub, "comparistion", mergecomp)
+            r = "MERGE: " + str(len(g)) + " " + str(mergesub) + " " + str(mergecomp) + " " + str(dt) + "\n"
+            file.write(r)
+            mergesub, mergecomp = 0, 0
+
+            # insertionSort
+            x = g.copy()
+            start = time.time()
+            xResult = insertionSort(x, sortOrder)
+            stop = time.time()
+            dt = round(stop - start, 10)
+            print("INSERT:", g, xResult[0],  "substitution:", xResult[2], "comparistion", xResult[1])
+            r = "INSERT: " + str(len(g)) + " " + str(xResult[2]) + " " + str(xResult[1]) + " " + str(dt) + "\n"
+            file.write(r)
+
+            file.write("\n")
+
+
+        file.close()
 
 
 if __name__ == '__main__':

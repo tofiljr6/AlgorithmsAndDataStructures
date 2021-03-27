@@ -42,6 +42,24 @@ Dzisiaj must have
 - porównania to każdy if else itp
 - przedstawienia to elemntów np. `A[j] = A[j+1]`
 
+---
+
+# Notes - zad2
+- [X] genertowanie losowej tablic *n* elementowej
+  - [ ] zadbaj o dobry generator pseudolosowy **??**
+- [X] sortowanie kopii wygenerowanych tablicy każdym algorytmem
+- [X] dla każdego z sortowań, zapisania do pliku `nazwa_pliku` statystyk odnoście rozmiary danych n, liczby wykonanych porównań między kluczami, liczby przestawień kluczy oraz czas działania algorytmu sortującego
+
+Po zakończeniu programu korzystąc z zebranych danych, przedstaw na wykresach za pomocą `numpy`:
+
+- [ ] średnią liczbę wykonywanych porównań (c) w zależności od n
+- [ ] średnią liczbę przedstawień kluczy (s) w zależności od n
+- [ ] średni czas działania algorytmu w zależności od n
+- [ ] iloraz c/n w zależności od n
+- [ ] iloraz s/n w zależności od n
+
+Zadbaj o to by dane dotyczące różnych algorytmów sortujących można było nakładać na te same osie i porównywać. Sprawdź, jak wykresy zmieniają się dla różnych wartości k (np. k = 1, k = 10, k = 1000)
+
 ### Strerr
 
 `python3 zad1.py 2> err.txt` wypisuje to co na standardowym wyjściu było!
