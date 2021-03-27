@@ -1,24 +1,6 @@
 from math import floor
 import sys
-from functools import wraps
-from time import process_time
 import time
-import timeit
-
-# is this the best option to measure time on execution?
-def measure(func):
-    @wraps(func)
-    def _time_it(*args, **kwargs):
-        start = int(round(process_time() * 1000000))
-        try:
-            return func(*args, **kwargs)
-        finally:
-            end_ = int(round(process_time() * 1000000)) - start
-            print(
-                f"Total execution time {func.__name__}: {end_ if end_ > 0 else 0} ms"
-            )
-
-    return _time_it
 
 
 def compare(a, b, decison):
@@ -33,7 +15,7 @@ def compare(a, b, decison):
     elif decison == ">=":
         return a >= b
 
-# @measure
+
 def insertionSort(A, dec):
     """ The method sorts A - array in insertion sort way.
         A method returns array in 'dec' order.
@@ -58,8 +40,10 @@ def insertionSort(A, dec):
         substitution += 1
     return A, comparison, substitution
 
+
 mergesub = 0 # substitution in merge algorithm
 mergecomp = 0 # comparison in merge algorithm
+
 
 def mergeSort(A, dec):
     """ The method sorts A - array in merge sort way.
@@ -167,7 +151,7 @@ descending = ">="
 
 
 def loadArray():
-    """ Function
+    """ Function load elements from command line
     """
     elements = int(input())
     array = list()
@@ -256,7 +240,6 @@ def doWork():
                                round(stop - start, 20))
 
     print("Sorted array: ", sortAlg,  sortOrder, "->", array )
-
 
 
 if __name__ == '__main__':
