@@ -103,6 +103,82 @@ def merge(C, D, dec):
     return E
 
 
+dualpivotsub = 0 # substitution in dualpivotquicksort algorithm
+dualpivotcomp = 0 # comparison in dualpivotquicksort algorithm
+
+
+def dualPivotQuickSort(A, low, high):
+    """ The method sorts  A - Array with dual pivot quick sort
+        Using counting startegy
+    """
+    global dualpivotcomp, dualpivotsub
+
+    if low < high:
+        dualpivotcomp += 1
+        if A[low] > A[high]:
+            dualpivotsub += 1
+            A[low], A[high] = A[high], A[low]
+
+        p, q = countPart(A, low, high)
+
+        dualPivotQuickSort(A, low, p -1)
+        dualPivotQuickSort(A, p+1, q-1)
+        dualPivotQuickSort(A, q+1, high)
+
+
+def countPart(A, low, high):
+    """ The method makes partition in counting strategy
+    """
+    global dualpivotcomp, dualpivotsub
+
+    i = low + 1
+    k = high -1
+    j = i
+    d = 0
+
+    leftPivot = A[low]
+    rightPivot = A[high]
+
+    while j <= k:
+        if d > 0:
+            dualpivotcomp += 1
+            if A[j] < leftPivot:
+                dualpivotsub += 1
+                A[i], A[j] = A[j], A[i]
+                i += 1
+                j += 1
+                d += 1
+            else:
+                dualpivotcomp += 1
+                if A[j] < rightPivot:
+                    j += 1
+                else:
+                    dualpivotsub += 1
+                    A[j], A[k] = A[k], A[j]
+                    k -= 1
+                    d -= 1
+        else:
+            dualpivotcomp += 1
+            while A[k] > rightPivot:
+                k -= 1
+                d -= 1
+            if j <= k:
+                dualpivotcomp += 1
+                if A[k] < leftPivot:
+                    dualpivotsub += 1
+                    A[k], A[j], A[i] = A[j], A[i], A[k]
+                    i += 1
+                    d += 1
+                else:
+                    dualpivotsub += 1
+                    A[j], A[k] = A[k], A[j]
+                j += 1
+    dualpivotsub += 2
+    A[low], A[i-1] = A[i-1], A[low]
+    A[high], A[k+1] = A[k+1], A[high]
+
+    return i -1, k + 1
+
 
 quicksub = 0 # substitution in quicksort algorithm
 quickcomp = 0 # comparison in quicksort algorithm
@@ -122,7 +198,7 @@ def quickSort(A, p, r, dec):
 
 
 def partitionHoare(A, low, high, dec):
-    """ The method make partition in Hoare way.
+    """ The method makes partition in Hoare way.
     """
     pivot = A[floor((low+high)/2)]
     i = low - 1
@@ -227,7 +303,7 @@ def doWork():
 
         for i in range(len(args)):
             if args[i] == "--type":
-                if args[i+1] in ["quick", "merge", "insert"]:
+                if args[i+1] in ["quick", "merge", "insert", "dualpivot"]:
                     sortAlg = args[i+1]
             elif args[i] == "--comp":
                 if args[i+1] in [">=", "<="]:
@@ -286,6 +362,18 @@ def doWork():
                                    insertcomp,
                                    finalCheck(array, sortOrder),
                                    round(stop - start, 20))
+        elif sortAlg == "dualpivot":
+            # time measure
+            start = time.time()
+            dualPivotQuickSort(array, 0, len(array) - 1)
+            stop = time.time()
+
+            # std error output
+            writeStdErrSubsAndComp(dualpivotsub,
+                                   dualpivotcomp,
+                                   finalCheck(array, sortOrder),
+                                   round(stop - start, 20))
+
 
         print("Sorted array: ", sortAlg,  sortOrder, "->", array )
     else:
