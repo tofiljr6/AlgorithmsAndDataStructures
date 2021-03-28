@@ -194,7 +194,7 @@ def writeStdErrSubsAndComp(sub, comp, sorted, deltat):
 
 
 def generateRandomArrays(k):
-    n = [i * 100 for i in range(10, 101)]
+    n = [i * 100 for i in range(1, 101)]
     listarrays = list()
     for kprim in range(k):
         for en in n:

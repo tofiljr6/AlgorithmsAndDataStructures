@@ -18,9 +18,9 @@ Przetestuj każdy z algorytmów dla następujących przypadków danych wejściow
 5
 9 1 -7 1000 4
 ```
-# Notes - zad 1
+## Notes - zad 1
 
-## ToDo
+### ToDo
 Dzisiaj must have
 - [X] standardowe wyjście błędu **prawie zrobione, ale teraz nie na to pora**
 - [X] obsługa z konsoli
@@ -42,9 +42,17 @@ Dzisiaj must have
 - porównania to każdy if else itp
 - przedstawienia to elemntów np. `A[j] = A[j+1]`
 
+### Strerr
+
+`python3 zad1.py 2> err.txt` wypisuje to co na standardowym wyjściu było!
+
 ---
 
-# Notes - zad2
+## Zadanie 2
+
+Usupełnij program z **zadania 1.** o możliwość wywoływania go z dodatkowym parametrem uruchomienia `--stat nazwa_pliku k`. W takim przypadku program ma pomijać wczytywanie danych i dla każdego `n` należącego do {100, 200, 300, ..., 100000} wykonywać po k niezależnych powtórzeń:
+
+## Notes - zad2
 - [X] genertowanie losowej tablic *n* elementowej
   - [ ] zadbaj o dobry generator pseudolosowy **??**
 - [X] sortowanie kopii wygenerowanych tablicy każdym algorytmem
@@ -52,14 +60,32 @@ Dzisiaj must have
 
 Po zakończeniu programu korzystąc z zebranych danych, przedstaw na wykresach za pomocą `numpy`:
 
-- [ ] średnią liczbę wykonywanych porównań (c) w zależności od n
-- [ ] średnią liczbę przedstawień kluczy (s) w zależności od n
-- [ ] średni czas działania algorytmu w zależności od n
-- [ ] iloraz c/n w zależności od n
-- [ ] iloraz s/n w zależności od n
+- [X] średnią liczbę wykonywanych porównań (c) w zależności od n
+- [X] średnią liczbę przedstawień kluczy (s) w zależności od n
+- [X] średni czas działania algorytmu w zależności od n
+- [X] iloraz c/n w zależności od n
+- [X] iloraz s/n w zależności od n
 
 Zadbaj o to by dane dotyczące różnych algorytmów sortujących można było nakładać na te same osie i porównywać. Sprawdź, jak wykresy zmieniają się dla różnych wartości k (np. k = 1, k = 10, k = 1000)
 
-### Strerr
+### WYKRESY
 
-`python3 zad1.py 2> err.txt` wypisuje to co na standardowym wyjściu było!
+#### Wykres przedstawiający liczbę wykonanych porównań w zależności od n
+
+![wykres liczby wykonanych porównań w zależności od n](/lista2/charts/avgCompALL.png)
+
+#### Wykres przedstawiający liczbę wykonanych przestawień w zależności od n
+
+![wykres liczby wykonanych przestawień w zależności od n](/lista2/charts/avgSubsALL.png)
+
+#### Wykres przedstawiający liczbę wykonanych przestawień w zależności od n
+
+![wykres liczby sekund w zależności od n](/lista2/charts/timeALL.png)
+
+#### Wykres przedstawiający iloraz c/n w zależności od n
+
+![Wykres przedstawiający iloraz c/n w zależności od n](/lista2/charts/cn.png)
+
+#### Wykres przedstawiający iloraz s/n w zależności od n
+
+![Wykres przedstawiający iloraz s/n w zależności od n](/lista2/charts/sn.png)
