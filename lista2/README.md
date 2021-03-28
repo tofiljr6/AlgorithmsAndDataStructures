@@ -108,4 +108,4 @@ Sam algorytm **DAUL-PIVOT QUICKSORT** jest w pliku `zad3.py`. Natomiast w progra
 - [X] Stworzyć na boku działający program
 - [X] Uzupełnić plik `zad1.py` o ten algorytm
 - [ ] Przeprowadzić dla niego statystyki
-  - [ ]  Porównania i przestawienia
+  - [X]  Porównania i przestawienia

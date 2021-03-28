@@ -17,6 +17,15 @@ def compare(a, b, decison):
         return a >= b
 
 
+def compare2(a, b, decison):
+    """ Hard codeing xd
+    """
+    if decison == "<=":
+        return a < b
+    elif decison == ">=":
+        return a > b
+
+
 def insertionSort(A, dec):
     """ The method sorts A - array in insertion sort way.
         A method returns array in 'dec' order.
@@ -107,7 +116,7 @@ dualpivotsub = 0 # substitution in dualpivotquicksort algorithm
 dualpivotcomp = 0 # comparison in dualpivotquicksort algorithm
 
 
-def dualPivotQuickSort(A, low, high):
+def dualPivotQuickSort(A, low, high, dec):
     """ The method sorts  A - Array with dual pivot quick sort
         Using counting startegy
     """
@@ -115,18 +124,19 @@ def dualPivotQuickSort(A, low, high):
 
     if low < high:
         dualpivotcomp += 1
-        if A[low] > A[high]:
+        # if A[low] > A[high]:
+        if compare2(A[high], A[low], dec):
             dualpivotsub += 1
             A[low], A[high] = A[high], A[low]
 
-        p, q = countPart(A, low, high)
+        p, q = countPart(A, low, high, dec)
 
-        dualPivotQuickSort(A, low, p -1)
-        dualPivotQuickSort(A, p+1, q-1)
-        dualPivotQuickSort(A, q+1, high)
+        dualPivotQuickSort(A, low, p -1, dec)
+        dualPivotQuickSort(A, p+1, q-1, dec)
+        dualPivotQuickSort(A, q+1, high, dec)
 
 
-def countPart(A, low, high):
+def countPart(A, low, high, dec):
     """ The method makes partition in counting strategy
     """
     global dualpivotcomp, dualpivotsub
@@ -142,7 +152,8 @@ def countPart(A, low, high):
     while j <= k:
         if d > 0:
             dualpivotcomp += 1
-            if A[j] < leftPivot:
+            # if A[j] < leftPivot:
+            if compare2(A[j], leftPivot, dec):
                 dualpivotsub += 1
                 A[i], A[j] = A[j], A[i]
                 i += 1
@@ -150,7 +161,8 @@ def countPart(A, low, high):
                 d += 1
             else:
                 dualpivotcomp += 1
-                if A[j] < rightPivot:
+                # if A[j] < rightPivot:
+                if compare2(A[j], rightPivot, dec):
                     j += 1
                 else:
                     dualpivotsub += 1
@@ -159,12 +171,14 @@ def countPart(A, low, high):
                     d -= 1
         else:
             dualpivotcomp += 1
-            while A[k] > rightPivot:
+            # while A[k] > rightPivot:
+            while compare2(rightPivot, A[k], dec):
                 k -= 1
                 d -= 1
             if j <= k:
                 dualpivotcomp += 1
-                if A[k] < leftPivot:
+                # if A[k] < leftPivot:
+                if compare2(A[k], leftPivot, dec):
                     dualpivotsub += 1
                     A[k], A[j], A[i] = A[j], A[i], A[k]
                     i += 1
@@ -365,7 +379,7 @@ def doWork():
         elif sortAlg == "dualpivot":
             # time measure
             start = time.time()
-            dualPivotQuickSort(array, 0, len(array) - 1)
+            dualPivotQuickSort(array, 0, len(array) - 1, sortOrder)
             stop = time.time()
 
             # std error output
