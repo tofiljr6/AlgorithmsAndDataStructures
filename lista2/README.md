@@ -50,7 +50,12 @@ Dzisiaj must have
 
 ## Zadanie 2
 
-Usupełnij program z **zadania 1.** o możliwość wywoływania go z dodatkowym parametrem uruchomienia `--stat nazwa_pliku k`. W takim przypadku program ma pomijać wczytywanie danych i dla każdego `n` należącego do {100, 200, 300, ..., 100000} wykonywać po k niezależnych powtórzeń:
+Plik główny to rysowania wykresów to **dataProcessing.py**
+Jest bardzo słabo napisany, do poprawy w wolnym czasie!
+
+Uzupełnij program z **zadania 1.** o możliwość wywoływania go z dodatkowym parametrem uruchomienia `--stat nazwa_pliku k`. W takim przypadku program ma pomijać wczytywanie danych i dla każdego `n` należącego do {100, 200, 300, ..., 100000} wykonywać po k niezależnych powtórzeń
+
+Moje dane są w pliku `result2.txt`
 
 ## Notes - zad2
 - [X] genertowanie losowej tablic *n* elementowej
@@ -58,7 +63,7 @@ Usupełnij program z **zadania 1.** o możliwość wywoływania go z dodatkowym 
 - [X] sortowanie kopii wygenerowanych tablicy każdym algorytmem
 - [X] dla każdego z sortowań, zapisania do pliku `nazwa_pliku` statystyk odnoście rozmiary danych n, liczby wykonanych porównań między kluczami, liczby przestawień kluczy oraz czas działania algorytmu sortującego
 
-Po zakończeniu programu korzystąc z zebranych danych, przedstaw na wykresach za pomocą `numpy`:
+Po zakończeniu programu korzystając z zebranych danych, przedstaw na wykresach za pomocą `numpy`:
 
 - [X] średnią liczbę wykonywanych porównań (c) w zależności od n
 - [X] średnią liczbę przedstawień kluczy (s) w zależności od n
@@ -89,3 +94,18 @@ Zadbaj o to by dane dotyczące różnych algorytmów sortujących można było n
 #### Wykres przedstawiający iloraz s/n w zależności od n
 
 ![Wykres przedstawiający iloraz s/n w zależności od n](/lista2/charts/sn.png)
+
+---
+
+## Zadanie 3
+
+Sam algorytm **DAUL-PIVOT QUICKSORT** jest w pliku `zad3.py`. Natomiast w programie `zad1.py` dopisze i przeprowadzę na nim statystyki.
+
+## Notes - zad 3
+
+- [X] Stworzyć algorytm na kartce
+- [X] Przemyśleć count
+- [X] Stworzyć na boku działający program
+- [ ] Uzupełnić plik `zad1.py` o ten algorytm
+- [ ] Przeprowadzić dla niego statystyki
+  - [ ]  Porównania i przestawienia
