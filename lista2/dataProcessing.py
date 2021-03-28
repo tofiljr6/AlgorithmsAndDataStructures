@@ -2,16 +2,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 from math import log
 
-file = open('result2.txt', 'r')
-
-xnlogn = np.linspace(100, 10000, 100)
-ynlogn = np.log2(xnlogn) * xnlogn
-plt.clf()
-# plt.plot(xnlogn, ynlogn, 'm--', label="nlogn")
-
-xx2 = np.arange(100, 10000)
-yy2 = 0.45 * xx2 ** 2
-# plt.plot(xx2, yy2, 'c--', label="x^2")
+file = open('result4.txt', 'r')
+file2 = open('hybrid.txt', 'r')
 
 def titleGenerator(i1, i2, i3):
     title = ""
@@ -37,6 +29,9 @@ def titleGenerator(i1, i2, i3):
     elif i3 == 2:
         title = "s/n against n"
         ylabel = "s/n"
+    elif i3 == 3:
+        title = "experiment const"
+        ylabel = "const in dp"
 
     return title, xlabel, ylabel
 
@@ -48,16 +43,26 @@ def table(index1, index2, index3):
     ymerge = []
     xinsert = []
     yinsert = []
+    xdp = []
+    ydp = []
+    xhybrid = []
+    yhybrid = []
+
     xquickfinal = []
     yquickfinal = []
     xmergefinal = []
     ymergefinal = []
     xinsertfinal = []
     yinsertfinal = []
+    xdpfinal = []
+    ydpfinal = []
+    xhybridfinal = []
+    yhybridfinal = []
 
     i = 0
     j = 0
     k = 0
+    m = 0
     # global xquickfinal, yquickfinal
     for l in file:
         l = l.split(" ")
@@ -81,7 +86,9 @@ def table(index1, index2, index3):
                     yquick.append(float(line[index2]))
                 elif index3 == 1 or index3 == 2:
                     yquick.append(float(line[index2])/float(line[index1]))
-                print(xquick, yquick)
+                elif index3 == 3:
+                    pass
+                # print(xquick, yquick)
                 i += 1
                 if i % 100 == 0:
                     xquickfinal.append(xquick)
@@ -112,8 +119,55 @@ def table(index1, index2, index3):
                     yinsertfinal.append(yinsert)
                     xinsert = []
                     yinsert = []
+            elif line[0] == "DPivot:":
+                xdp.append(float(line[index1]))
+                if index3 == 0:
+                    ydp.append(float(line[index2]))
+                elif index3 == 1 or index3 == 2:
+                    ydp.append(float(line[index2])/float(line[index1]))
+                elif index3 == 3:
+                    pass
+
+                m += 1
+                if m % 100 == 0:
+                    xdpfinal.append(xdp)
+                    ydpfinal.append(ydp)
+                    xdp = []
+                    ydp = []
+
+
+    for l2 in file2:
+        l2 = l2.split(" ")
+        line = []
+
+        hh = 0
+        if len(l2) > 1:
+            line.append(l2[0])
+            line.append(l2[1])
+            line.append(l2[2])
+            line.append(l2[3])
+
+            if len(l2) > 2:
+                tline = l2[4].rsplit("\n")
+                line.append(tline[0])
+
+            xhybrid.append(float(line[index1]))
+            if index3 == 0:
+                yhybrid.append(float(line[index2]))
+            elif index3 == 1 or index3 == 2:
+                yhybrid.append(float(line[index2])/float(line[index1]))
+            hh += 1
+            if hh % 100 == 0:
+                xhybridfinal.append(xhybrid)
+                yhybridfinal.append(yhybrid)
+                xhybrid = []
+                yhybrid = []
+
+            print(line)
 
     title, xlabel, ylabel = titleGenerator(index1, index2, index3)
+
+    print(xhybrid, len(xhybrid))
 
     plt.title(title)
     plt.xlabel(xlabel)
@@ -124,9 +178,22 @@ def table(index1, index2, index3):
     for i in range(len(xquickfinal)):
         if m == 0:
             plt.plot(xquickfinal[i], yquickfinal[i], 'g-', label="quicksort")
-            plt.plot(xmergefinal[i], ymergefinal[i], 'y-', label="mergesort")
-            plt.plot(xinsertfinal[i], yinsertfinal[i], 'r-', label="insertsort")
+            # plt.plot(xmergefinal[i], ymergefinal[i], 'c-', label="mergesort")
+            # plt.plot(xinsertfinal[i], yinsertfinal[i], 'r-', label="insertsort")
+            plt.plot(xdpfinal[i], ydpfinal[i], 'm-', label="quicksort - dual pivot")
+            plt.plot(xhybrid, yhybrid, 'k-', label="hybrid")
             m += 1
+
+    # xnlogn = np.linspace(100, 10000, 100)
+    # tmp = float(xnlogn/1000000)
+    # ynlogn = xnlogn * np.log(xnlogn)
+    # ynlogn = (xnlogn * np.log(xnlogn))/1000000
+    # plt.plot(xnlogn, ynlogn, 'y-', label="nlogn")
+    #
+    # xx2 = np.arange(100, 10000)
+    # yy2 = xx2 ** 2
+    # plt.plot(xx2, yy2, 'r--', label="x^2")
+
 
     plt.legend()
     plt.show()
@@ -145,12 +212,15 @@ def table(index1, index2, index3):
 # table(1,2,1)
 
 # s/n againts n
-table(1,3,2)
+# table(1,3,2)
+
+table(1,4,0)
 
 
 
 
-
+file.close()
+file2.close()
 
 
 

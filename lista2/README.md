@@ -83,7 +83,7 @@ Zadbaj o to by dane dotyczące różnych algorytmów sortujących można było n
 
 ![wykres liczby wykonanych przestawień w zależności od n](/lista2/charts/avgSubsALL.png)
 
-#### Wykres przedstawiający liczbę wykonanych przestawień w zależności od n
+#### Wykres przedstawiający liczbę sekund w zależności od n
 
 ![wykres liczby sekund w zależności od n](/lista2/charts/timeALL.png)
 
@@ -109,3 +109,9 @@ Sam algorytm **DAUL-PIVOT QUICKSORT** jest w pliku `zad3.py`. Natomiast w progra
 - [X] Uzupełnić plik `zad1.py` o ten algorytm
 - [ ] Przeprowadzić dla niego statystyki
   - [X]  Porównania i przestawienia
+- [ ] eksperymentalnie wyznaczyć stałą przed nlogn
+
+
+### Wykres liczby sekund w zależności od n - porównanie quicksortów
+
+![Wykres quicksrotów](/lista2/charts/quickSort.png)
