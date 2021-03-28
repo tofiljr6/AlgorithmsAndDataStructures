@@ -80,18 +80,18 @@ def hybrid_quick_sort(arr, low, high):
 import random
 import time
 
-file = open("hybrid.txt", "w")
+file = open("hybrid2.txt", "w")
 
-
-for kk in range(1, 101):
-    a = [random.randint(1, 3000) for i in range(kk * 100)]
-    start = time.time()
-    hybrid_quick_sort(a, 0, len(a) - 1)
-    stop = time.time()
-    # print(a)
-    r = "HYBRID: " +  str(kk * 100) + " " +  str(s) + " " +str(c) + " " + str(stop-start) + "\n"
-    print(r)
-    file.write(r)
-    s,c = 0, 0
+for q in range(3):
+    for kk in range(1, 101):
+        a = [random.randint(1, 3000) for i in range(kk * 100)]
+        start = time.time()
+        hybrid_quick_sort(a, 0, len(a) - 1)
+        stop = time.time()
+        # print(a)
+        r = "HYBRID: " +  str(kk * 100) + " " +  str(s) + " " +str(c) + " " + str(stop-start) + "\n"
+        print(r)
+        file.write(r)
+        s,c = 0, 0
 
 file.close()

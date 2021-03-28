@@ -295,29 +295,6 @@ def generateRandomArrays(k):
             listarrays.append(list([random.randint(1,1000) for j in range(en)]))
     return listarrays
 
-hybridsub = 0
-hybridcomp = 0
-
-def hybrid(A, low, high, dec):
-    """ Hybrid alg using insertion and quicksort
-    """
-    global hybridsub, hybridcomp
-
-    while low < high:
-        if high - low < 11:
-            insertionSort(A, dec)
-            break
-        else:
-            pivot = partitionHoare(A, low, high, dec)
-
-            hybridcomp += 1
-            if pivot - low < high - pivot:
-                hybrid(A, low, pivot - 1, dec)
-                low = pivot + 1;
-            else:
-                hybrid(A, pivot + 1, high, dec)
-                high = pivot - 1
-
 
 def doWork():
     """ Function to handle command line usage.
@@ -345,7 +322,7 @@ def doWork():
 
         for i in range(len(args)):
             if args[i] == "--type":
-                if args[i+1] in ["quick", "merge", "insert", "dualpivot", "hybrid"]:
+                if args[i+1] in ["quick", "merge", "insert", "dualpivot"]:
                     sortAlg = args[i+1]
             elif args[i] == "--comp":
                 if args[i+1] in [">=", "<="]:
@@ -415,16 +392,6 @@ def doWork():
                                    dualpivotcomp,
                                    finalCheck(array, sortOrder),
                                    round(stop - start, 20))
-        elif sortAlg == "hybrid":
-            start = time.time()
-            hybrid(array, 0, len(array) - 1, sortOrder)
-            stop = time.time()
-
-            writeStdErrSubsAndComp(hybridsub,
-                                   hybridcomp,
-                                   finalCheck(array, sortOrder),
-                                   round(stop - start, 20))
-
 
         print("Sorted array: ", sortAlg,  sortOrder, "->", array )
     else:
@@ -453,14 +420,14 @@ def doWork():
             mergesub, mergecomp = 0, 0
 
             # insertionSort
-            # x = g.copy()
-            # start = time.time()
-            # xResult = insertionSort(x, sortOrder)
-            # stop = time.time()
-            # dt = round(stop - start, 10)
-            # print("INSERT:", g, xResult[0],  "substitution:", xResult[2], "comparistion", xResult[1])
-            # r = "INSERT: " + str(len(g)) + " " + str(xResult[2]) + " " + str(xResult[1]) + " " + str(dt) + "\n"
-            # file.write(r)
+            x = g.copy()
+            start = time.time()
+            xResult = insertionSort(x, sortOrder)
+            stop = time.time()
+            dt = round(stop - start, 10)
+            print("INSERT:", g, xResult[0],  "substitution:", xResult[2], "comparistion", xResult[1])
+            r = "INSERT: " + str(len(g)) + " " + str(xResult[2]) + " " + str(xResult[1]) + " " + str(dt) + "\n"
+            file.write(r)
 
             # dual pivot quick sort
             x = g.copy()
@@ -472,14 +439,6 @@ def doWork():
             r = "DPivot: " + str(len(g)) + " " + str(dualpivotsub) + " " + str(dualpivotcomp) + " " + str(dt) + "\n"
             file.write(r)
 
-            # hybrid quick sort vs insertion
-            x = g.copy()
-            start = time.time()
-            hybrid(x, 0, len(x) - 1, sortOrder)
-            stop = time.time()
-            dt = round(stop - start, 10)
-            r = "Hybrid: " + str(len(g)) + " " + str(hybridsub) + " " + str(hybridcomp) + " " + str(dt) + "\n"
-            file.write(r)
 
             file.write("\n")
 

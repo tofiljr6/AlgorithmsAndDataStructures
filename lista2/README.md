@@ -1,5 +1,28 @@
 # Lista 2
 
+## Lista czego brakuje (rzeczy wymagane):
+
+
+
+### zadanie 1
+
+- [ ] chyba wszystko
+
+### zadanie 2
+
+- [ ] dobry generator liczb
+- [ ] uśrednienie wyników
+
+### zadanie 3
+
+- [ ] ekseprymentalnie wyznacz stałą stojącą przy czynniku `nlogn` dla liczby porównań między kluczami
+
+### zadanie 4
+
+- [ ] sortowanie dowolnego typu
+
+---
+
 ## Zadanie 1
 
 Program przyjmuje dwa parametry wejściowe `--type insert|merge|quick` - określający wykorzystywanych algorytm sortowania oraz `--comp '>='|'<='` - określający porządek sortowania.
