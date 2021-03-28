@@ -115,3 +115,12 @@ Sam algorytm **DAUL-PIVOT QUICKSORT** jest w pliku `zad3.py`. Natomiast w progra
 ### Wykres liczby sekund w zależności od n - porównanie quicksortów
 
 ![Wykres quicksrotów](/lista2/charts/quickSort.png)
+
+
+## Zadanie 4
+
+Zrobiłem w osobnym pliku.
+
+### Wykres liczby sekund w zaelżności od n - porównanie quicksortów i hybrydy
+
+![Hybryda sort](/lista2/charts/hybridcomparequicks.png)
