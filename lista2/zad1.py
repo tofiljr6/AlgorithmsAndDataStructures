@@ -265,7 +265,7 @@ ascending = "<="
 descending = ">="
 
 
-def loadArray():
+def loadArrayInt():
     """ Function load elements from command line
     """
     elements = int(input())
@@ -274,6 +274,15 @@ def loadArray():
         array.append(int(input()))
     return array
 
+
+def loadArrayString():
+    """ Function load elements from command line
+    """
+    elements = int(input())
+    array = list()
+    for element in range(elements):
+        array.append(input())
+    return array
 
 def writeStdErrSubsAndComp(sub, comp, sorted, deltat):
     """ Function writes on standard error output numbers of substitution and comparison
@@ -305,6 +314,7 @@ def doWork():
     sortAlg = 0
     sortOrder = 0
     kRepeats = 0
+    arraytype = 0
 
     # I reset values in --stat
     global quicksub, quickcomp
@@ -318,7 +328,8 @@ def doWork():
         print('You have not passed any commands in!')
     else:
         if "--stat" not in args:
-            array = loadArray()
+            # array = loadArrayInt()
+            arraytype = 1
 
         for i in range(len(args)):
             if args[i] == "--type":
@@ -337,6 +348,17 @@ def doWork():
                 kRepeats = int(args[i+2])
                 # file.write(args[i+2])
                 # print("--stat", args[i+2])
+            elif args[i] == "--value":
+                if args[i+1] == "int":
+                    arraytype = 1
+                elif args[i+1] == "string":
+                    arraytype = 2
+
+    # type of array
+    if arraytype == 1:
+        array = loadArrayInt()
+    elif arraytype == 2:
+        array = loadArrayString()
 
     # execution if --stat not in command line
     if "--stat" not in args:

@@ -1,0 +1,11 @@
+10
+biurko
+tablet
+komputer
+myszka
+monitor
+spac
+programowanie
+sortowanie
+algorytmy
+terminal

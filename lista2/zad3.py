@@ -53,15 +53,16 @@ def sortAsc(A, low, high):
 
 # x = [4,2,8,6,9,1,3,7,5]
 # x = [i * 10 for i in x]
-x = ['Mateusz', 'Piotrek', 'Adam']
+x = ['Mateusz', 'Piotrek', 'Adam', 'Abcka', 'Abc']
 print(x)
-# sortAsc(x, 0, len(x) - 1)
-y = countPart(x, 0, len(x) - 1)
-print(x, y)
-# print(x)
 
-#
-#
+sortAsc(x, 0, len(x) - 1)
+print(x)
+
+# y = countPart(x, 0, len(x) - 1)
+# print(x, y)
+
+
 # def countPart2(A, low, high):
 #     i = low + 1
 #     k = high -1
