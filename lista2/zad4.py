@@ -80,9 +80,9 @@ def hybrid_quick_sort(arr, low, high):
 import random
 import time
 
-file = open("hybrid2.txt", "w")
+file = open("hybrid3.txt", "w")
 
-for q in range(3):
+for q in range(10):
     for kk in range(1, 101):
         a = [random.randint(1, 3000) for i in range(kk * 100)]
         start = time.time()

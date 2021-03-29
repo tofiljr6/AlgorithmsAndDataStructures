@@ -6,12 +6,12 @@
 
 ### zadanie 1
 
-- [ ] chyba wszystko
+- [X] brak niebraków
 
 ### zadanie 2
 
 - [ ] dobry generator liczb
-- [ ] uśrednienie wyników
+- [X] uśrednienie wyników
 
 ### zadanie 3
 
@@ -130,7 +130,7 @@ Sam algorytm **DAUL-PIVOT QUICKSORT** jest w pliku `zad3.py`. Natomiast w progra
 - [X] Przemyśleć count
 - [X] Stworzyć na boku działający program
 - [X] Uzupełnić plik `zad1.py` o ten algorytm
-- [ ] Przeprowadzić dla niego statystyki
+- [X] Przeprowadzić dla niego statystyki
   - [X]  Porównania i przestawienia
 - [ ] eksperymentalnie wyznaczyć stałą przed nlogn
 
@@ -147,3 +147,10 @@ Zrobiłem w osobnym pliku.
 ### Wykres liczby sekund w zaelżności od n - porównanie quicksortów i hybrydy
 
 ![Hybryda sort](/lista2/charts/hybridcomparequicks.png)
+
+### Uśredniony wynik hybrydowego dla 10 niezależnych powtórzeń
+
+W sumie można się tego było spodziewać..., nie ma sensu powtarzać tego dla quicksortów
+(może później to zrobię)
+
+![Hybryda sort2](/lista2/charts/avghybrid.png)
