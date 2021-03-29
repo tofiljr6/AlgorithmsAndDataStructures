@@ -219,14 +219,12 @@ def partitionHoare(A, low, high, dec):
     j = high + 1
 
     global quicksub, quickcomp
-    global hybridsub, hybridcomp
 
     while True:
         while True:
             i += 1
 
             quickcomp += 1
-            hybridcomp += 1
             # pretty print - commented because it dirt result in second exercises
             # sys.stderr.write("I: if %s %s %s \n" % (pivot, dec, A[i]))
             if compare(pivot, A[i], dec):
@@ -236,7 +234,6 @@ def partitionHoare(A, low, high, dec):
             j -= 1
 
             quickcomp += 1
-            hybridcomp += 1
             # pretty print - commented because it dirt result in second exercises
             # sys.stderr.write("J: if %s %s %s \n" % (A[j], dec, pivot))
             if compare(A[j], pivot, dec):
@@ -247,7 +244,6 @@ def partitionHoare(A, low, high, dec):
             return j
 
         quicksub += 1
-        hybridsub += 1
         # pretty print - commented because it dirt result in second exercises
         # sys.stderr.write("A: %s swap %s <-> %s \n" % (A, A[i], A[j]))
         A[i], A[j] = A[j], A[i]
