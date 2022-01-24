@@ -1,0 +1,17 @@
+16
+insert aaa
+insert a
+insert b
+insert ab
+inorder
+delete a
+delete b
+inorder
+max
+min
+find aaa
+find three
+inorder
+successor aaa
+load sample.txt
+find zounds

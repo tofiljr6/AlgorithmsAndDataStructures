@@ -1,0 +1,10 @@
+a aaa ab b  
+aaa ab  
+ab
+aaa
+1
+0
+aaa ab  
+ab
+load sample.txt
+0

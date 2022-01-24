@@ -1,0 +1,10 @@
+9
+empty
+insert 3 4
+insert 5 9
+insert 5 0
+insert 1 0
+insert 2 0
+insert 3 0
+empty
+print
